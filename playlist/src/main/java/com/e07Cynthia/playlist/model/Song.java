@@ -31,7 +31,7 @@ public class Song implements Serializable {
     //Métodos helpers Artist
 
     public void addArtist(Artist a){
-        this.artist = a;
+        artist = a;
         a.getSongs().add(this);
     }
 
