@@ -1,5 +1,6 @@
 package com.e07Cynthia.playlist;
 
+import com.e07Cynthia.playlist.model.AddedTo;
 import com.e07Cynthia.playlist.model.Artist;
 import com.e07Cynthia.playlist.model.Playlist;
 import com.e07Cynthia.playlist.model.Song;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +26,7 @@ public class MainDePrueba {
     @PostConstruct
     public void test(){
 
-        Artist artist = Artist.builder().name("John Lennon").build();
+        Artist artist = Artist.builder().name("John Lennon").songs(new ArrayList<>()).build();
         artistService.save(artist);
 
         Song song = Song.builder()
@@ -31,11 +34,15 @@ public class MainDePrueba {
                 .album("Imagine")
                 .year("1971")
                 .build();
-        songService.save(song);
+
+        //Agregamos el artista en canción y la canción en artista
 
         song.addArtist(artist);
+        songService.save(song);
 
-        artistService.findById(1L).orElse(null).getSongs().add(songService.findById(2L).orElse(null));
+        /* Borrar Canción de artista y artista de canción
+        song.removeArtist(artist);
+        songService.save(song);*/
 
         Playlist playlist = Playlist.builder()
                 .name("Folk Rock")
@@ -44,5 +51,6 @@ public class MainDePrueba {
         playlistService.save(playlist);
 
         song = addToService.addToPlaylist(song, playlist);
+        songService.save(song);
     }
 }

@@ -26,6 +26,7 @@ public class AddedTo implements Serializable {
     private Playlist playlist;
 
     private LocalDateTime datetime;
+    @Column(name = "orden")
     private String order;
 
     //Métodos Helpers

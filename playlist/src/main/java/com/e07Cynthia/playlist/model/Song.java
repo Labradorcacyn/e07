@@ -21,6 +21,7 @@ public class Song implements Serializable {
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
+
     private String album;
     private String year;
 
@@ -37,7 +38,6 @@ public class Song implements Serializable {
 
     public void removeArtist(Artist a){
         a.getSongs().remove(this);
-        this.artist = null;
+        artist = null;
     }
-
 }
