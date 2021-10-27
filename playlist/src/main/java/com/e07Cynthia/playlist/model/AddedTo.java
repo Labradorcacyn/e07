@@ -1,6 +1,8 @@
 package com.e07Cynthia.playlist.model;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor @AllArgsConstructor @Builder
 @Getter @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class AddedTo implements Serializable {
 
     @Builder.Default
@@ -25,7 +28,9 @@ public class AddedTo implements Serializable {
     @JoinColumn(name="playlist_id")
     private Playlist playlist;
 
+    @CreatedDate
     private LocalDateTime datetime;
+
     @Column(name = "orden")
     private String order;
 
